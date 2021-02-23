@@ -1,12 +1,16 @@
 # Flask & Pagination Tutorial
-mongoDB의 skip과 limit을 이용하여 pagination을 구현하였습니다.
+이 프로젝트는 pagination을 처음 접하는 초심자를 위한 튜토리얼입니다.
+![project image](https://user-images.githubusercontent.com/26322627/108871910-fc6c3f80-763c-11eb-9f72-6f112b390a63.png)
 
-mongoDB의 skip이 성능 이슈가 있는것으로 알려져있지만, 이 프로젝트는 pagination을 처음 접하는 초심자를 위한 튜토리얼이기 때문에 해당 부분은 고려되지 않았음을 미리 밝힙니다. 
+> 참고로, MongoDB의 skip 함수는 성능이슈가 있을 수 있기에 실 서비스를 고려하시는 경우 [다른 방법](https://www.codementor.io/@arpitbhayani/fast-and-efficient-pagination-in-mongodb-9095flbqr)을 참고하시기 바랍니다.
 
-## 필요 라이브러리
+## 시작 방법
+- 필요한 라이브러리를 설치해주세요
 ```
-pip install flask pymongo
+pip install flask pymongo requests
 ```
+- `init_db.py` 파일을 실행하여 데이터를 MongoDB에 저장하세요
+- `app.py`를 실행하세요
 
 ## API
 - [The CAT API](https://thecatapi.com/)
