@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagination Tutorial</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .card-columns {
+            width: 600px;
+            height: 600px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pagination {
+            width: 600px;
+            margin: 32px auto;
+            text-align: center;
+        }
+
+        .pagination > a {
+            font-size: 32px;
+            text-decoration: none;
+            color: black;
+            padding: 16px;
+        }
+
+        .pagination > .active {
+            color: deeppink;
+        }
+
+        .card {
+            width: 150px;
+            height: 150px;
+            margin: 16px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+    <script>
+        let page = 1
+        let size = 9
+
+        $(document).ready(function () {
+            // getAllImage()
+            getPaginationImage(page, size)
+        })
+
+        // 모든 사진 다 가져오기
+        function getAllImage() {
+            $.ajax({
+                type: 'GET',
+                url: '/all_image',
+                success: function (res) {
+                    if (res['result'] === 'success') {
+                        let data = res['data']
+                        drawImage(data)
+                    }
+                }
+            })
+        }
+
+        // pagination을 이용하여 이미지 가져오기
+        function getPaginationImage(page, size) {
+            $.ajax({
+                type: 'GET',
+                url: '/image',
+                data: {
+                    'page': page,
+                    'size': size,
+                },
+                success: function (res) {
+                    $('.card-columns').empty()
+                    $('.pagination').empty()
+                    if (res['result'] === 'success') {
+                        let data = res['data']
+                        let total = res['total']
+                        drawImage(data)
+                        drawPagination(total, page, size)
+                    }
+                }
+            })
+        }
+
+        function drawImage(data) {
+            for (let i = 0; i < data.length; i++) {
+                let id = data[i]['id']
+                let img = data[i]['img']
+                let temp = `<div class="card">
+                                <img src="${img}" alt="${id}">
+                            </div>`
+                $('.card-columns').append(temp)
+            }
+        }
+
+        function drawPagination(total, page, size) {
+            // 11개 데이터가 있을 때 size가 10이면 2page가 나와야하므로 올림
+            let totalPage = Math.ceil(total / size)
+            console.log('total :', total, 'size :', size, 'totalPage :', totalPage)
+            for (let i = 0; i < totalPage; i++) {
+                let n = i + 1
+                let active = (page === n) ? 'active' : ''
+                let temp = `<a class="${active}" href="#" onclick="getPaginationImage(${n}, ${size})">${n}</a>`
+                $('.pagination').append(temp)
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div class="card-columns"></div>
+<div class="pagination"></div>
+
+</body>
+</html>
