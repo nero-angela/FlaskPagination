@@ -1,5 +1,5 @@
 # Flask & Pagination Tutorial
-이 프로젝트는 pagination을 처음 접하는 초심자를 위한 튜토리얼입니다.
+이 프로젝트는 Flask와 MongoDB를 이용한 pagination 튜토리얼입니다.
 ![project image](https://user-images.githubusercontent.com/26322627/108871910-fc6c3f80-763c-11eb-9f72-6f112b390a63.png)
 
 > 참고로, MongoDB의 skip 함수는 성능이슈가 있을 수 있기에 실 서비스를 고려하시는 경우 [다른 방법](https://www.codementor.io/@arpitbhayani/fast-and-efficient-pagination-in-mongodb-9095flbqr)을 참고하시기 바랍니다.
